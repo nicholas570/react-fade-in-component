@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import propTypes from 'prop-types';
 
 function FadeInSection({ children }) {
-  const [isVisible, setVisible] = React.useState(false);
-  const domRef = React.useRef();
-  React.useEffect(() => {
+  const [isVisible, setVisible] = useState(false);
+  const domRef = useRef();
+  useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => setVisible(entry.isIntersecting));
     });
@@ -12,7 +12,7 @@ function FadeInSection({ children }) {
   }, []);
   return (
     <div
-      className={`fade-in-section ${isVisible ? 'is-visible' : ''}`}
+      className={`fade-in-section ${isVisible && 'is-visible'}`}
       ref={domRef}
     >
       {children}
